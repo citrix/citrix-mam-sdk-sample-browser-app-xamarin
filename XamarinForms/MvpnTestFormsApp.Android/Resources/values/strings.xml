@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">MvpnTestFormsApp</string>
+    <string name="MvpnTunnelStarted">Tunnel started successfully!!!</string>
+    <string name="MvpnTunnelFailed">Failed to start tunnel!!!</string>
+    <string name="MvpnTunnelAlreadyRunning">Tunnel is already running.</string>
+    <string name="MvpnSessionExpired">Session Expired!!!</string>
+    <string name="MvpnNonManagedApp">Could not retrieve policies!!! \n This could be because of the following reasons: \n\t 1. SecureHub is not installed.\n\t 2. SecureHub enrollment is not completed.\n\t 3. App is not managed through CEM.</string>
+    <string name="MvpnNonWebSsoMode">Cannot start tunnel for NetworkAccess mode other than Tunneled - Web SSO!!!</string>
+    <string name="MvpnNoNetworkConnection">Failed to start tunnel. No Network!!!</string>
+</resources>

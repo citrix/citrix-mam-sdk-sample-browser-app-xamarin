@@ -1,0 +1,26 @@
+﻿@model UrlModel
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+        <form action="hybrid:MvpnTest" method="GET">
+            <br>
+			<label id="label">URL:</label>
+			<input type="text" id="textbox" name="textbox" value="@Model.Text" autocapitalize="none"/>
+
+            <br>
+            <br>
+            <br>
+			<input type="submit" name="Button" value="Start Tunnel" />
+
+            <br>
+            <br>
+			<input type="submit" name="Button" value="WebView" />
+
+            <br>
+            <br>
+			<input type="submit" name="Button" value="HttpClient" />
+		</form>
+	</body>
+</html>	
