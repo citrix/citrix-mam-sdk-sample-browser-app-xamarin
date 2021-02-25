@@ -19,4 +19,4 @@ For questions and support:
 
 ## License
 
-[MIT](./LICENSE)
+[MIT License](./LICENSE)
