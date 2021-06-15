@@ -26,8 +26,7 @@ namespace MvpnTestAndroidApp
             webView.Settings.JavaScriptEnabled = true;
             webView.SetWebViewClient(new HybridWebViewClient(this));
 
-            var model = new UrlModel() { Text = "http://testweb.cemmobile.ctx" };
-            //fileurl = "http://testweb.cemmobile.ctx/test/Sample.txt";
+            var model = new UrlModel() { Text = "https://citrix.com" };
             var template = new RazorView() { Model = model };
             var page = template.GenerateString();
 
