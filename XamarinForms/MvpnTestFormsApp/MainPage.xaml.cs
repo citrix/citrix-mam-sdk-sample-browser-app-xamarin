@@ -46,15 +46,12 @@ namespace MvpnTestFormsApp
             {
                 Console.WriteLine(ex.Message);
             }
-            finally
-            {
-                activityIndicator.IsRunning = false;
-            }
         }
 
         public void OnSuccess()
         {
             activityIndicator.IsRunning = false;
+            DisplayAlert("Success", "Tunnel Started Successfully!!!", "OK");
         }
 
         public void OnError(StartTunnelError error)
