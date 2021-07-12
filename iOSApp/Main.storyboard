@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CEJ-D9-BFw">
+                                <rect key="frame" x="20" y="56" width="335" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0py-CW-bfR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES" textContentType="url"/>
+                            </textField>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99k-wc-lY4">
+                                <rect key="frame" x="20" y="106" width="335" height="502"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HTTP URL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQ9-JD-kPb">
+                                <rect key="frame" x="20" y="18" width="84.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1H-nC-9Ed">
+                                <rect key="frame" x="325" y="18" width="30" height="30"/>
+                                <state key="normal" title="GO"/>
+                                <connections>
+                                    <action selector="GoButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yN2-B2-kKI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfA-e3-8Hx">
+                                <rect key="frame" x="140" y="637" width="95" height="30"/>
+                                <state key="normal" title="Open Camera"/>
+                                <connections>
+                                    <action selector="OpenCameraAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qAP-wc-tOm"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UI4-1d-1C9"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fQ9-JD-kPb" firstAttribute="top" secondItem="UI4-1d-1C9" secondAttribute="top" constant="18" id="380-yr-xE8"/>
+                            <constraint firstItem="fQ9-JD-kPb" firstAttribute="leading" secondItem="UI4-1d-1C9" secondAttribute="leading" constant="20" id="6se-lJ-gnQ"/>
+                            <constraint firstItem="UI4-1d-1C9" firstAttribute="trailing" secondItem="K1H-nC-9Ed" secondAttribute="trailing" constant="20" id="ARx-lq-228"/>
+                            <constraint firstItem="CEJ-D9-BFw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AuA-lH-NUk"/>
+                            <constraint firstItem="nfA-e3-8Hx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AuM-FP-hdg"/>
+                            <constraint firstItem="K1H-nC-9Ed" firstAttribute="top" secondItem="UI4-1d-1C9" secondAttribute="top" constant="18" id="Ntv-g5-kUg"/>
+                            <constraint firstItem="UI4-1d-1C9" firstAttribute="trailing" secondItem="CEJ-D9-BFw" secondAttribute="trailing" constant="20" id="UZr-kx-GV5"/>
+                            <constraint firstItem="nfA-e3-8Hx" firstAttribute="top" secondItem="99k-wc-lY4" secondAttribute="bottom" constant="29" id="UvO-lQ-FlP"/>
+                            <constraint firstItem="CEJ-D9-BFw" firstAttribute="top" secondItem="fQ9-JD-kPb" secondAttribute="bottom" constant="8" symbolic="YES" id="bl6-M5-b4q"/>
+                            <constraint firstItem="nfA-e3-8Hx" firstAttribute="bottom" secondItem="UI4-1d-1C9" secondAttribute="bottom" id="gL5-q9-jkH"/>
+                            <constraint firstItem="99k-wc-lY4" firstAttribute="leading" secondItem="UI4-1d-1C9" secondAttribute="leading" constant="20" id="kaq-co-34a"/>
+                            <constraint firstItem="99k-wc-lY4" firstAttribute="top" secondItem="CEJ-D9-BFw" secondAttribute="bottom" priority="250" constant="20" id="vRU-Cw-1l5"/>
+                            <constraint firstItem="CEJ-D9-BFw" firstAttribute="leading" secondItem="UI4-1d-1C9" secondAttribute="leading" constant="20" id="x6b-6N-vmj"/>
+                            <constraint firstItem="CEJ-D9-BFw" firstAttribute="top" secondItem="K1H-nC-9Ed" secondAttribute="bottom" constant="8" symbolic="YES" id="x7h-7R-iD6"/>
+                            <constraint firstItem="UI4-1d-1C9" firstAttribute="trailing" secondItem="99k-wc-lY4" secondAttribute="trailing" constant="20" id="ymy-6z-gdl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="goButton" destination="8bC-Xf-vdC" id="YXX-AA-pQr"/>
+                        <outlet property="httpUrlTextField" destination="CEJ-D9-BFw" id="Syh-NB-mcn"/>
+                        <outlet property="webView" destination="99k-wc-lY4" id="Ygl-yA-RSC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-43.478260869565219" y="10.714285714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
