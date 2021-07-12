@@ -1,14 +1,4 @@
-﻿/*
- * Copyright (c) Citrix Systems, Inc.
- * All rights reserved.
- *
- * Use and support of this software is governed by the terms
- * and conditions of the software license agreement and support
- * policy of Citrix Systems, Inc. and/or its subsidiaries.
- *
- */
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Net.Http;
 using Com.Citrix.Mvpn.Api;
@@ -19,39 +9,25 @@ namespace MvpnTestFormsApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage, IStartTunnelCallback
     {
+
         public MainPage()
         {
-            try
-            {
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                mvpnService?.Init();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
             InitializeComponent();
-            urlEntry.Text = "https://citrix.com";
+            urlEntry.Text = "http://testweb.cemmobile.ctx";
+            IMicroVPNService service = DependencyService.Get<IMicroVPNService>();
+            service.Init();
         }
 
         void OnStartTunnel(object sender, EventArgs args)
         {
-            try
-            {
-                activityIndicator.IsRunning = true;
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                mvpnService?.StartTunnel(this);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            activityIndicator.IsRunning = true;
+            IMicroVPNService service = DependencyService.Get<IMicroVPNService>();
+            service.StartTunnel(this);
         }
 
         public void OnSuccess()
         {
             activityIndicator.IsRunning = false;
-            DisplayAlert("Success", "Tunnel Started Successfully!!!", "OK");
         }
 
         public void OnError(StartTunnelError error)
@@ -62,32 +38,15 @@ namespace MvpnTestFormsApp
 
         void OnStopTunnel(object sender, EventArgs args)
         {
-            try
-            {
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                mvpnService?.StopTunnel();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            IMicroVPNService service = DependencyService.Get<IMicroVPNService>();
+            service.StopTunnel();
         }
 
         void OnCheckTunnel(object sender, EventArgs args)
         {
-            try
-            {
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                if (mvpnService != null)
-                {
-                    bool isRunning = mvpnService.IsNetworkTunnelRunning();
-                    DisplayAlert("Info", isRunning ? "Tunnel is started" : "Tunnel is stopped", "OK");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            IMicroVPNService service = DependencyService.Get<IMicroVPNService>();
+            bool isRunning = service.IsNetworkTunnelRunning();
+            DisplayAlert("Info", isRunning ? "Tunnel is started" : "Tunnel is stopped", "OK");
         }
 
         async void OnWebView(object sender, EventArgs args)
@@ -102,13 +61,10 @@ namespace MvpnTestFormsApp
 
             try
             {
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                if (mvpnService != null)
-                {
-                    HttpClient httpClient = mvpnService.CreateHttpClient();
-                    var result = await httpClient.GetStringAsync(urlEntry.Text);
-                    await DisplayAlert("HttpClient", result, "OK");
-                }
+                IMicroVPNService service = DependencyService.Get<IMicroVPNService>();
+                HttpClient httpClient = service.CreateHttpClient();
+                var result = await httpClient.GetStringAsync(urlEntry.Text);
+                await DisplayAlert("HttpClient", result, "OK");
             }
             catch (Exception ex)
             {
@@ -117,6 +73,7 @@ namespace MvpnTestFormsApp
             finally
             {
                 activityIndicator.IsRunning = false;
+
             }
         }
     }

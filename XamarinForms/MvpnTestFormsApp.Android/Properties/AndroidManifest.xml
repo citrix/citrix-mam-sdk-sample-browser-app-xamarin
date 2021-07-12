@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.citrix.mvpntestformsapp">
-	<uses-sdk android:minSdkVersion="24" android:targetSdkVersion="30" />
+	<uses-sdk android:minSdkVersion="24" android:targetSdkVersion="29" />
 	<application android:label="MvpnTestFormsApp.Android"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<queries>
-		<package android:name="com.zenprise" />
-		<package android:name="com.citrix.Receiver" />
-	</queries>
 </manifest>
-

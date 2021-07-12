@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="MvpnTestAndroidApp.MvpnTestAndroidApp">
-	<uses-sdk android:minSdkVersion="24" android:targetSdkVersion="30" />
+	<uses-sdk android:minSdkVersion="24" android:targetSdkVersion="29" />
 	<uses-permission android:name="android.permission.WRITE_PROFILE" />
-	<application android:allowBackup="true" android:icon="@mipmap/icon" android:label="@string/app_name" android:usesCleartextTraffic="true"></application>
-	<queries>
-		<package android:name="com.zenprise" />
-		<package android:name="com.citrix.Receiver" />
-	</queries>
+	<application 
+        android:icon="@mipmap/icon" 
+        android:label="@string/app_name" 
+        android:allowBackup="false"
+        android:usesCleartextTraffic="false">
+	</application>
 </manifest>
