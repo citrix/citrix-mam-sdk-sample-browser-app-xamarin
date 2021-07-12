@@ -8,4 +8,3 @@
 		<package android:name="com.citrix.Receiver" />
 	</queries>
 </manifest>
-

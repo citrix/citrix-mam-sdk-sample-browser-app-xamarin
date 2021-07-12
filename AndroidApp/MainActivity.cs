@@ -69,7 +69,6 @@ namespace MvpnTestAndroidApp
                 this.activity = activity;
             }
 
-            [System.Obsolete]
             public override bool ShouldOverrideUrlLoading(WebView webView, string url)
             {
 

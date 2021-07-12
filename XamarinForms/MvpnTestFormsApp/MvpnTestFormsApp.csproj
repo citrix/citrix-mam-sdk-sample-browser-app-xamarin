@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
-    <PackageReference Include="Citrix.Xamarin.Forms.MAMSDK" Version="21.6.0.4" />
+    <PackageReference Include="Citrix.Xamarin.Forms.MAMSDK" Version="21.6.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
