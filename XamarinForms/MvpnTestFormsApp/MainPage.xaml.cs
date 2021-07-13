@@ -9,6 +9,7 @@
  */
 
 using System;
+using System.Runtime;
 using System.ComponentModel;
 using System.Net.Http;
 using Com.Citrix.Mvpn.Api;
@@ -21,15 +22,26 @@ namespace MvpnTestFormsApp
     {
         public MainPage()
         {
-            try
+            if (Device.RuntimePlatform == Device.iOS)
             {
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                mvpnService?.Init();
+                MessagingCenter.Subscribe<Xamarin.Forms.Application>(Xamarin.Forms.Application.Current, "SdksInitializedAndReady", (sender) =>
+                {
+                    // Only perform tunneled network operations after receiving this callback.
+                });
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex.Message);
+                try
+                {
+                    var mvpnService = DependencyService.Get<IMicroVPNService>();
+                    mvpnService?.Init();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
+
             InitializeComponent();
             urlEntry.Text = "https://citrix.com";
         }
@@ -45,6 +57,13 @@ namespace MvpnTestFormsApp
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    activityIndicator.IsRunning = false;
+                }
             }
         }
 

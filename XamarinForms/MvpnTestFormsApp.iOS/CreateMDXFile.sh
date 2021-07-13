@@ -16,7 +16,7 @@ export PACKAGEID=""
 export APPIDPREFIX=""
 # 3. CERTNAME - Your codesign identity.
 export CERTNAME=""
-export TOOLKIT_DIR="$PROJECT_DIR/../../../Tools/iOSTools"
+export TOOLKIT_DIR="$PROJECT_DIR/../../../citrix-mam-sdks/tools/ios"
 
 echo $STOREURL
 echo $APPTYPE
