@@ -1,10 +1,9 @@
 ﻿/*
- * Copyright (c) Citrix Systems, Inc.
- * All rights reserved.
+ * Copyright © 2022. Cloud Software Group, Inc. All Rights Reserved. Confidential & Proprietary.
  *
  * Use and support of this software is governed by the terms
  * and conditions of the software license agreement and support
- * policy of Citrix Systems, Inc. and/or its subsidiaries.
+ * policy of Cloud Software Group, Inc. and/or its subsidiaries.
  *
  */
 
