@@ -1,10 +1,9 @@
 ﻿/*
- * Copyright (c) Citrix Systems, Inc.
- * All rights reserved.
+ * Copyright © 2022. Cloud Software Group, Inc. All Rights Reserved. Confidential & Proprietary.
  *
  * Use and support of this software is governed by the terms
  * and conditions of the software license agreement and support
- * policy of Citrix Systems, Inc. and/or its subsidiaries.
+ * policy of Cloud Software Group, Inc. and/or its subsidiaries.
  *
  */
 
@@ -14,110 +13,163 @@ using System.Net.Http;
 using Com.Citrix.Mvpn.Api;
 using Xamarin.Forms;
 
+
 namespace MvpnTestFormsApp
 {
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage, IStartTunnelCallback
     {
+        public static Label statLabel;
+        
         public MainPage()
         {
-            try
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                MessagingCenter.Subscribe<Xamarin.Forms.Application>(Xamarin.Forms.Application.Current, "SdksInitializedAndReady", (sender) =>
+                {
+                    // Only perform tunneled network operations after receiving this callback.
+                });
+            }
+            else
             {
                 var mvpnService = DependencyService.Get<IMicroVPNService>();
                 mvpnService?.Init();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+
             InitializeComponent();
-            urlEntry.Text = "https://citrix.com";
+            urlEntry.Text = "https://testweb.cemmobile.ctx";
+
+            if (stat == null)
+            {
+                throw new NullReferenceException("Status label is null");
+            }
+            //statLabel is created so webview renderer can edit label
+            statLabel = stat;
         }
 
         void OnStartTunnel(object sender, EventArgs args)
         {
-            try
+            //resets status label
+            stat.Text = "Status";
+            if (Device.RuntimePlatform == Device.iOS)
             {
-                activityIndicator.IsRunning = true;
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                mvpnService?.StartTunnel(this);
+                activityIndicator.IsRunning = false;
+                return;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+
+            activityIndicator.IsRunning = true;
+            var mvpnService = DependencyService.Get<IMicroVPNService>();
+            mvpnService?.StartTunnel(this);
         }
 
         public void OnSuccess()
         {
             activityIndicator.IsRunning = false;
-            DisplayAlert("Success", "Tunnel Started Successfully!!!", "OK");
+            stat.Text = "Tunnel started";
         }
 
         public void OnError(StartTunnelError error)
         {
             activityIndicator.IsRunning = false;
-            DisplayAlert("Error", error.ToString(), "OK");
+            stat.Text = "Error: " + error.ToString();
         }
 
         void OnStopTunnel(object sender, EventArgs args)
         {
-            try
+            if (Device.RuntimePlatform == Device.iOS)
             {
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                mvpnService?.StopTunnel();
+                return;
             }
-            catch (Exception ex)
+            if (IsNetworkTunnelOff())
             {
-                Console.WriteLine(ex.Message);
+                stat.Text = "Tunnel is not running";
+                return;
             }
+            //resets status label
+            stat.Text = "Status";
+            var mvpnService = DependencyService.Get<IMicroVPNService>();
+            mvpnService?.StopTunnel();
+            stat.Text = "Tunnel stopped";
         }
 
         void OnCheckTunnel(object sender, EventArgs args)
         {
-            try
+            //resets status label
+            stat.Text = "Status";
+            if (Device.RuntimePlatform == Device.iOS)
             {
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                if (mvpnService != null)
-                {
-                    bool isRunning = mvpnService.IsNetworkTunnelRunning();
-                    DisplayAlert("Info", isRunning ? "Tunnel is started" : "Tunnel is stopped", "OK");
-                }
+                return;
             }
-            catch (Exception ex)
+            var mvpnService = DependencyService.Get<IMicroVPNService>();
+            if (mvpnService != null)
             {
-                Console.WriteLine(ex.Message);
+                bool isRunning = mvpnService.IsNetworkTunnelRunning();
+                stat.Text = isRunning ? "Tunnel is running" : "Tunnel is not running";
             }
+        }
+
+        //returns true when the tunnel is not running or there is some error
+        bool IsNetworkTunnelOff()
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                return true;
+            }
+            var mvpnService = DependencyService.Get<IMicroVPNService>();
+            if (mvpnService != null)
+            {
+                return !mvpnService.IsNetworkTunnelRunning();
+            }
+            return true;
         }
 
         async void OnWebView(object sender, EventArgs args)
         {
+            if (Device.RuntimePlatform == Device.Android && IsNetworkTunnelOff())
+            {
+                stat.Text = "Tunnel is not running";
+                return;
+            }
+            //resets status label
+            stat.Text = "Status";
             activityIndicator.IsRunning = false;
-            await Navigation.PushAsync(new WebViewPage(urlEntry.Text));
+            WebViewPage page = new WebViewPage(urlEntry.Text);
+            await Navigation.PushAsync(page);
         }
 
         async void OnHttpClient(object sender, EventArgs args)
         {
-            activityIndicator.IsRunning = true;
-
-            try
+            if (Device.RuntimePlatform == Device.Android && IsNetworkTunnelOff())
             {
-                var mvpnService = DependencyService.Get<IMicroVPNService>();
-                if (mvpnService != null)
+                stat.Text = "Tunnel is not running";
+                return;
+            }
+            //resets status label
+            stat.Text = "Status";
+            activityIndicator.IsRunning = true;
+            var mvpnService = DependencyService.Get<IMicroVPNService>();
+            if (mvpnService != null)
+            {
+                HttpClient httpClient = mvpnService.CreateHttpClient();
+                try
                 {
-                    HttpClient httpClient = mvpnService.CreateHttpClient();
                     var result = await httpClient.GetStringAsync(urlEntry.Text);
                     await DisplayAlert("HttpClient", result, "OK");
+                    if (result.Equals("") || result == null)
+                    {
+                        stat.Text = "Fetch failure";
+                    }
+                    else
+                    {
+                        stat.Text = "Fetch successful";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Error", ex.ToString(), "OK");
                 }
             }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                activityIndicator.IsRunning = false;
-            }
+            activityIndicator.IsRunning = false;
         }
     }
 }

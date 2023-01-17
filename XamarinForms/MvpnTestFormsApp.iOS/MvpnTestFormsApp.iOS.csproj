@@ -97,22 +97,22 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Citrix.Xamarin.iOS.MAMSDK.Core">
-        <Version>23.1.0.*</Version>
+        <Version>23.1.1.*</Version>
     </PackageReference>
     <PackageReference Include="Citrix.Xamarin.iOS.MAMSDK.AppCore">
-        <Version>23.1.0.*</Version>
+        <Version>23.1.1.*</Version>
     </PackageReference>
     <PackageReference Include="Citrix.Xamarin.iOS.MAMSDK.Compliance">
-        <Version>23.1.0.*</Version>
+        <Version>23.1.1.*</Version>
     </PackageReference>
     <PackageReference Include="Citrix.Xamarin.iOS.MAMSDK.Containment">
-        <Version>23.1.0.*</Version>
+        <Version>23.1.1.*</Version>
     </PackageReference>
     <PackageReference Include="Citrix.Xamarin.iOS.MAMSDK.LocalAuth">
-        <Version>23.1.0.*</Version>
+        <Version>23.1.1.*</Version>
     </PackageReference>
     <PackageReference Include="Citrix.Xamarin.iOS.MAMSDK.Network">
-        <Version>23.1.0.*</Version>
+        <Version>23.1.1.*</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
